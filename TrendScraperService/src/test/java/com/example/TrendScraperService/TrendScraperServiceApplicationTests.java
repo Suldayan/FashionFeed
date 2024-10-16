@@ -1,10 +1,10 @@
-package com.example.trend_scraper;
+package com.example.TrendScraperService;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TrendScraperApplicationTests {
+class TrendScraperServiceApplicationTests {
 
 	@Test
 	void contextLoads() {

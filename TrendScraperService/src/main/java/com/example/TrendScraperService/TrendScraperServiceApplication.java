@@ -1,13 +1,13 @@
-package com.example.trend_scraper;
+package com.example.TrendScraperService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TrendScraperApplication {
+public class TrendScraperServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TrendScraperApplication.class, args);
+		SpringApplication.run(TrendScraperServiceApplication.class, args);
 	}
 
 }

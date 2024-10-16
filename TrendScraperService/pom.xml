@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>trend_scraper</artifactId>
+	<artifactId>TrendScraperService</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>trend_scraper</name>
+	<name>TrendScraperService</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
