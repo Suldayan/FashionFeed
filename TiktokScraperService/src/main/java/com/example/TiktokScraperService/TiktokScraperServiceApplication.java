@@ -1,13 +1,13 @@
-package com.example.TrendScraperService;
+package com.example.TiktokScraperService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TrendScraperServiceApplication {
+public class TiktokScraperServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TrendScraperServiceApplication.class, args);
+		SpringApplication.run(TiktokScraperServiceApplication.class, args);
 	}
 
 }
