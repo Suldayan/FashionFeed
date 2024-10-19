@@ -13,10 +13,10 @@ public class PlaywrightConfig {
 
     private static final Logger logger = LoggerFactory.getLogger(PlaywrightConfig.class);
 
-    @Value("${playwright.baseUrl}")
-    private String baseUrl;
+    @Value("${playwright.BASE_URL}")
+    private String BASE_URL;
 
-    @Value("${playwright.timeout}")
+    @Value("${playwright.wait.timeout}")
     private int timeout;
 
     @Bean(destroyMethod = "close")
@@ -67,9 +67,9 @@ public class PlaywrightConfig {
     }
 
     @Bean
-    public String baseUrl() {
+    public String BASE_URL() {
         try {
-            return baseUrl;
+            return BASE_URL;
         } catch (BeanCreationException e) {
             logger.error("An error has occurred during bean creating for Base URL: {} - {}",
                     e.getMessage(), e.getBeanName());

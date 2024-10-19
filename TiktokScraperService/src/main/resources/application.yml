@@ -1,0 +1,14 @@
+spring:
+  application:
+    name:
+      TiktokScraperService
+
+playwright:
+  BASE_URL: https://www.tiktok.com/tag/dance
+  wait:
+    timeout: 10000
+
+video:
+  download:
+    path: src/main/resources/
+    timeout: 30000
