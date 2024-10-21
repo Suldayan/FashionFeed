@@ -74,6 +74,8 @@
 			<artifactId>playwright</artifactId>
 			<version>1.47.0</version>
 		</dependency>
+
+
 		<dependency>
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>

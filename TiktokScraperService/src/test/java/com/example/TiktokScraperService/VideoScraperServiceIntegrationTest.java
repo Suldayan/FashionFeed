@@ -33,7 +33,7 @@ public class VideoScraperServiceIntegrationTest {
                 .setJavaScriptEnabled(true));
         page = browserContext.newPage();
         String BASE_URL = "https://www.tiktok.com/tag/dance";
-        videoScraperService = new VideoScraperService(browser, page, BASE_URL);
+        videoScraperService = new VideoScraperService(page, BASE_URL);
     }
 
     @AfterEach
@@ -44,17 +44,18 @@ public class VideoScraperServiceIntegrationTest {
     }
 
     @Test
-    void testNavigateToBaseUrl_ShouldNavigateToBaseURL() {
+    void testGetAllVideoElementsOnCurrentDOM_ReturnsElementHandleList() throws VideoScraperException {
         assertDoesNotThrow(() -> {
-            videoScraperService.navigateToBaseUrl();
+            videoScraperService.getAllVideoElementsOnCurrentDom();
+
+            System.out.println(videoScraperService.getAllVideoElementsOnCurrentDom().stream().count());
         });
     }
 
     @Test
-    void testClickFirstVideoOfBaseUrl_ShouldNavigateSuccessfully() {
+    void testExtractHrefFromElements_ShouldSuccessfullyConvert() {
         assertDoesNotThrow(() -> {
-            videoScraperService.clickFirstVideoOfBaseUrl();
-            System.out.println(page.url());
+            videoScraperService.extractHrefFromElements();
         });
     }
 }

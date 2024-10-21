@@ -12,3 +12,9 @@ video:
   download:
     path: src/main/resources/
     timeout: 30000
+
+logging:
+  level:
+    com:
+      example:
+        TiktokScraperService: info
