@@ -8,12 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
-public class VideoScraperService {
+public class VideoScraperService implements AutoCloseable {
 
     private static final Logger logger = LoggerFactory.getLogger(VideoScraperService.class);
     private static final int INITIAL_TIMEOUT = 10000; // 10 seconds
@@ -27,6 +25,13 @@ public class VideoScraperService {
         this.page = page;
         BASE_URL = baseUrl;
         configurePageTimeouts();
+    }
+
+    @Override
+    public void close() {
+        if (page != null) {
+            page.close();
+        }
     }
 
     private void configurePageTimeouts() {
@@ -67,7 +72,6 @@ public class VideoScraperService {
     }
 
     // This is one of the main functions to navigate, validate, and extract the video link
-    // TODO: configure a scroll method to scroll through the page to generate more dom
     public Optional<ElementHandle[]> getAllVideoElementsOnCurrentDom() throws VideoScraperException {
         // First, we want to navigate to the base url (Configurable in the application.yml)
         navigateToUrl(BASE_URL);
@@ -85,31 +89,16 @@ public class VideoScraperService {
         }
     }
 
-    // Function for looping over the elements and convert them into links to make them navigable
-    public void extractHrefFromElements() throws VideoScraperException {
-        Optional<ElementHandle[]> links = getAllVideoElementsOnCurrentDom();
-        // We create an array of string to store the converted links
-        List<String> convertedLinks = new ArrayList<>();
+    // Helper function for scrolling after grabbing elements
+    public void scrollToLoadMoreDom() throws VideoScraperException {
+        try {
+            logger.info("Scrolling to load more dom");
+            logger.debug("Attempting to scroll to load more dom");
 
-        // Check if links are present
-        logger.debug("Attempting to convert the elements to string");
-        links.ifPresent(elements -> {
-            for (ElementHandle link : elements) {
-                try {
-                    String href = link.getAttribute("href");
-                    logger.debug("Adding href: {} to the list", href);
-
-                    convertedLinks.add(href);
-                    logger.info("href: {} has been added to the list", href);
-                } catch (Exception e) {
-                    try {
-                        throw new VideoScraperException("Error while navigating through video elements.", e);
-                    } catch (VideoScraperException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                }
-            }
-        });
+            page.evaluate("window.scrollBy(0, window.innerHeight);");
+            page.waitForTimeout(SCROLL_TIMEOUT);
+        } catch (PlaywrightException e) {
+            throw  new VideoScraperException("Unable to scroll down the current page");
+        }
     }
-
 }

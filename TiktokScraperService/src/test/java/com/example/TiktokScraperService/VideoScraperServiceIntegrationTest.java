@@ -55,7 +55,7 @@ public class VideoScraperServiceIntegrationTest {
     @Test
     void testExtractHrefFromElements_ShouldSuccessfullyConvert() {
         assertDoesNotThrow(() -> {
-            videoScraperService.extractHrefFromElements();
+            videoScraperService.extractHrefFromElementList();
         });
     }
 }
